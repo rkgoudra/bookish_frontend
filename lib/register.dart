@@ -76,7 +76,7 @@ class _RegisterState extends State<RegisterPage> {
     return Scaffold(
       //appBar: new AppBar(
       //title: new Text("Register"),
-      backgroundColor: Colors.lightBlueAccent,
+      backgroundColor: Color(0xff17BCB1),
 
       body: SingleChildScrollView(
         child: Form(

@@ -7,6 +7,8 @@ import 'package:http/http.dart' as http;
 import 'CommonString.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'home.dart';
+
 class LoginPage extends StatefulWidget {
   LoginPage({Key key, this.title}) : super(key: key);
   final String title;
@@ -50,14 +52,14 @@ class _LoginPageState extends State<LoginPage> {
     final data = jsonDecode(response.body);
     int value = data["status"];
     String message = data["message"];
-    String usr_id = data["user_id"];
-    String usr_name = data["user_name"];
-    String mail_id = data["email"];
+    String usrId = data["user_id"];
+    String usrName = data["user_name"];
+    String mailId = data["email"];
 
     if (value == 1) {
       setState(() {
         _loginStatus = LoginStatus.signIn;
-        savePref(value, mail_id, usr_name, usr_id);
+        savePref(value, mailId, usrName, usrId);
       });
       print(message);
       loginToast(message);
@@ -191,7 +193,7 @@ class _LoginPageState extends State<LoginPage> {
     final loginButon = Material(
       elevation: 5.0,
       borderRadius: BorderRadius.circular(30.0),
-      color: Color(0xff01c8f9),
+      color: Color(CommonString.btn_color),
       child: MaterialButton(
         minWidth: MediaQuery.of(context).size.width,
         padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
@@ -207,7 +209,7 @@ class _LoginPageState extends State<LoginPage> {
     final SignUpButton = Material(
       elevation: 5.0,
       borderRadius: BorderRadius.circular(30.0),
-      color: Color(0xff01c8f9),
+      color: Color(CommonString.btn_color),
       child: MaterialButton(
         minWidth: MediaQuery.of(context).size.width,
         padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
@@ -288,68 +290,3 @@ class _LoginPageState extends State<LoginPage> {
 }
 
 
-class MainMenu extends StatefulWidget {
-  final VoidCallback signOut;
-
-  MainMenu(this.signOut);
-
-  @override
-  _MainMenuState createState() => _MainMenuState();
-}
-
-class _MainMenuState extends State<MainMenu> {
-  signOut() {
-    setState(() {
-      widget.signOut();
-    });
-  }
-
-  int currentIndex = 0;
-  String selectedIndex = 'TAB: 0';
-
-  String email = "",
-      name = "",
-      id = "";
-  TabController tabController;
-
-  getPref() async {
-    SharedPreferences preferences = await SharedPreferences.getInstance();
-    setState(() {
-      id = preferences.getString("id");
-      email = preferences.getString("email");
-      name = preferences.getString("name");
-    });
-    print("id" + id);
-    print("user" + email);
-    print("name" + name);
-  }
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    getPref();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        actions: <Widget>[
-          IconButton(
-            onPressed: () {
-              signOut();
-            },
-            icon: Icon(Icons.lock_open),
-          )
-        ],
-      ),
-      body: Center(
-        child: Text(
-          "WelCome",
-          style: TextStyle(fontSize: 30.0, color: Colors.blue),
-        ),
-      ),
-    );
-  }
-}
