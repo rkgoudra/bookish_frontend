@@ -76,20 +76,24 @@ class _RegisterState extends State<RegisterPage> {
     return Scaffold(
       //appBar: new AppBar(
       //title: new Text("Register"),
-      backgroundColor: Color(0xff17BCB1),
+      backgroundColor: Colors.blueGrey,
 
       body: SingleChildScrollView(
         child: Form(
           key: _key,
-          child: Column(
-            //mainAxisAlignment: MainAxisAlignment.spaceAround,
-            //crossAxisAlignment: CrossAxisAlignment.center,
+          child:
+          Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               //Image.asset("assets/bookShelf.jpg",height: 55.0 ),
               SafeArea(
                 child: Center(
+
                   child: Image.asset(
-                    'assets/book.png',
+                    'assets/Bookis.png',
                   ),
                 ),
               ),
@@ -264,8 +268,8 @@ class _RegisterState extends State<RegisterPage> {
                           "Register",
                           style: TextStyle(fontSize: 22.0),
                         ),
-                        color: Colors.white,
-                        textColor: Colors.black,
+                        color: Color(CommonString.btn_color),
+                        textColor: Colors.white,
                         onPressed: () {
                           check();
                         }),
@@ -273,14 +277,15 @@ class _RegisterState extends State<RegisterPage> {
                   SizedBox(
                     height: 55.0,
                     child: RaisedButton(
+
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12.0)),
                         child: Text(
                           "Login Page ",
                           style: TextStyle(fontSize: 22.0),
                         ),
-                        textColor: Colors.black,
-                        color: Colors.white,
+                        textColor: Colors.white,
+                        color: Color(CommonString.btn_color),
                         onPressed: () {
                           Navigator.pop(
                             context
@@ -292,6 +297,7 @@ class _RegisterState extends State<RegisterPage> {
               ),
             ],
           ),
+        ),
         ),
       ),
     );
