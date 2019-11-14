@@ -1,6 +1,22 @@
 import 'package:bookish/CommonString.dart';
+import 'package:bookish/profile.dart';
+
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+class PlaceholderWidget extends StatelessWidget {
+  final Color color;
+
+  PlaceholderWidget(this.color);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: color,
+    );
+  }
+}
+
 
 class MainMenu extends StatefulWidget {
   final VoidCallback signOut;
@@ -9,17 +25,6 @@ class MainMenu extends StatefulWidget {
 
   @override
   _MainMenuState createState() => _MainMenuState();
-  List<Widget> containers = [
-    Container(
-      color: Colors.pink,
-    ),
-    Container(
-      color: Colors.blue,
-    ),
-    Container(
-      color: Colors.deepPurple,
-    )
-  ];
 }
 
 class _MainMenuState extends State<MainMenu> {
@@ -29,12 +34,16 @@ class _MainMenuState extends State<MainMenu> {
     });
   }
 
-  int currentIndex = 0;
+  int _currentIndex = 0;
+  final List<Widget> _children = [
+    PlaceholderWidget(Colors.white),
+    PlaceholderWidget(Colors.red),
+    UserProfile()
+  ];
+
   String selectedIndex = 'TAB: 0';
 
-  String email = "",
-      name = "",
-      id = "";
+  String email = "", name = "", id = "";
   TabController tabController;
 
   getPref() async {
@@ -49,6 +58,12 @@ class _MainMenuState extends State<MainMenu> {
     print("name" + name);
   }
 
+  void onTabTapped(int index) {
+    setState(() {
+      _currentIndex = index;
+    });
+  }
+
   @override
   void initState() {
     // TODO: implement initState
@@ -57,8 +72,8 @@ class _MainMenuState extends State<MainMenu> {
   }
 
   @override
-Widget build(BuildContext context) {
-return Scaffold(
+  Widget build(BuildContext context) {
+    return Scaffold(
 //      appBar: AppBar(
 //        actions: <Widget>[
 //          IconButton(
@@ -77,14 +92,12 @@ return Scaffold(
 //      ),
 //    );
 //  }
-  appBar: AppBar(
-
-    elevation: 30.0,
-    title:Text("BOOKISH"),
-    centerTitle: true,
-
-    backgroundColor: Color(CommonString.btn_color),
-      actions: <Widget>[
+      appBar: AppBar(
+        //elevation: 30.0,
+        title: Text("BOOKISH"),
+        centerTitle: true,
+        backgroundColor: Color(CommonString.background_color),
+        actions: <Widget>[
           IconButton(
             onPressed: () {
               signOut();
@@ -92,44 +105,27 @@ return Scaffold(
             icon: Icon(Icons.lock_open),
           )
         ],
-  ),
+      ),
 
-  body: Form(
-    child: Center(
-      child: Container(
-        decoration: BoxDecoration(
-          color: const Color(0xff7c94b6),
-          image: DecorationImage(
-            image: AssetImage("assets/bookShelf.jpg"),
-            fit: BoxFit.cover,
-            colorFilter: new ColorFilter.mode(
-                Colors.deepPurpleAccent.withOpacity(0.3),
-                BlendMode.dstATop),
+      body: _children[_currentIndex], // new
+      bottomNavigationBar: BottomNavigationBar(
+        onTap: onTabTapped, // new
+        currentIndex: _currentIndex, // new
+        items: [
+          new BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            title: Text('Home'),
           ),
-        ),
+          new BottomNavigationBarItem(
+            icon: Icon(Icons.book),
+            title: Text('Book'),
+          ),
+          new BottomNavigationBarItem(
+              icon: Icon(Icons.person),
+              title: Text('Profile')
+          )
+        ],
       ),
-    ),
-
-  ),
-  bottomNavigationBar: BottomNavigationBar(
-    currentIndex: 0, // this will be set when a new tab is tapped
-
-    items: [
-      BottomNavigationBarItem(
-        icon: new Icon(Icons.home),
-        title: new Text('Home'),
-
-      ),
-      BottomNavigationBarItem(
-        icon: new Icon(Icons.book),
-        title: new Text('Books'),
-      ),
-      BottomNavigationBarItem(
-          icon: Icon(Icons.person),
-          title: Text('Profile')
-      )
-    ],
-  ),
-);
+    );
   }
 }
