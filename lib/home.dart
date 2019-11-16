@@ -1,5 +1,8 @@
 import 'package:bookish/CommonString.dart';
+import 'package:bookish/homePage.dart';
 import 'package:bookish/profile.dart';
+import 'package:bookish/homePage.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -16,7 +19,6 @@ class PlaceholderWidget extends StatelessWidget {
     );
   }
 }
-
 
 class MainMenu extends StatefulWidget {
   final VoidCallback signOut;
@@ -36,7 +38,7 @@ class _MainMenuState extends State<MainMenu> {
 
   int _currentIndex = 0;
   final List<Widget> _children = [
-    PlaceholderWidget(Colors.white),
+    CarouselDemo(),
     PlaceholderWidget(Colors.red),
     UserProfile()
   ];
@@ -74,24 +76,6 @@ class _MainMenuState extends State<MainMenu> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-//      appBar: AppBar(
-//        actions: <Widget>[
-//          IconButton(
-//            onPressed: () {
-//              signOut();
-//            },
-//            icon: Icon(Icons.lock_open),
-//          )
-//        ],
-//      ),
-//      body: Center(
-//        child: Text(
-//          "WelCome",
-//          style: TextStyle(fontSize: 30.0, color: Colors.blue),
-//        ),
-//      ),
-//    );
-//  }
       appBar: AppBar(
         //elevation: 30.0,
         title: Text("BOOKISH"),
@@ -121,9 +105,7 @@ class _MainMenuState extends State<MainMenu> {
             title: Text('Book'),
           ),
           new BottomNavigationBarItem(
-              icon: Icon(Icons.person),
-              title: Text('Profile')
-          )
+              icon: Icon(Icons.person), title: Text('Profile'))
         ],
       ),
     );

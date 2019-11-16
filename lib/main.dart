@@ -1,3 +1,4 @@
+import 'package:bookish/CommonString.dart';
 import 'package:bookish/login.dart';
 import 'package:flutter/material.dart';
 
@@ -11,7 +12,7 @@ class MyApp extends StatelessWidget {
       title: 'Bookish',
       //debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: CommonString.yellow,
       ),
       home: LoginPage(title: 'Android application to maintain books'),
     );
