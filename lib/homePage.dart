@@ -1,3 +1,6 @@
+import 'dart:ui' as prefix0;
+
+import 'package:bookish/sizeconfig.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
@@ -121,10 +124,60 @@ class CarouselDemo extends StatelessWidget {
                 padding: EdgeInsets.symmetric(vertical: 15.0),
                 child: Column(children: [
                   CarouselWithIndicator(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      commonCardDesign("Text1"),
+                      commonCardDesign("Text2"),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      commonCardDesign("Text3"),
+                      commonCardDesign("Text4"),
+                    ],
+                  ),
                 ])),
           ],
+
+        ),
+      ),
+    );
+  }
+  commonCardDesign(String cardName){
+    return
+    Card(
+      elevation: 4.0,
+      shape: BeveledRectangleBorder(
+        borderRadius: BorderRadius.circular(10.0),
+      ),
+      color:Colors.blueGrey,
+      child: new InkWell(
+        onTap: () {
+          print("tapped");
+        },
+        child: Container(
+          width: SizeConfig.screenWidth*0.45,
+          height: SizeConfig.screenHeight*0.20,
+          child: Center(
+
+//            child: Text('$cardName', style: TextStyle(
+//              color:Colors.white,
+//
+//            ),
+//            ),
+          child: IconButton(
+            // Use the string name to access icons.
+              icon: Icon(Icons.library_books,color:Colors.white,),
+
+              onPressed: () { print('Using the sword'); }
+          ),
+
+          ),
         ),
       ),
     );
   }
 }
+

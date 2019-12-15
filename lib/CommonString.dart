@@ -22,4 +22,5 @@ class CommonString {
   static int btn_color = 0xff17BCB1;
   static const int background_color = 0xffFFCA50;
   static String title = "BOOKISH";
+
 }

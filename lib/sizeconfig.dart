@@ -23,5 +23,6 @@ class SizeConfig {
         _mediaQueryData.padding.bottom;
     safeBlockHorizontal = (screenWidth - _safeAreaHorizontal)/100;
     safeBlockVertical = (screenHeight - _safeAreaVertical)/100;
+//    MediaQuery.of(context).size.width * 0.45,
   }
 }
