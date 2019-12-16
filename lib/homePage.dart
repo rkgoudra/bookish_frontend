@@ -105,6 +105,7 @@ class _CarouselWithIndicatorState extends State<CarouselWithIndicator> {
 }
 //
 class CarouselDemo extends StatelessWidget {
+  dynamic iconName1, iconName2,iconName3, iconName4;
   @override
   Widget build(BuildContext context) {
     final CarouselSlider manualCarouselDemo = CarouselSlider(
@@ -124,18 +125,61 @@ class CarouselDemo extends StatelessWidget {
                 padding: EdgeInsets.symmetric(vertical: 15.0),
                 child: Column(children: [
                   CarouselWithIndicator(),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: <Widget>[
-                      commonCardDesign("Text1"),
-                      commonCardDesign("Text2"),
-                    ],
+                  Visibility(
+                    visible: false,
+                    child: Column(
+                      children: <Widget>[
+                        iconName1=IconButton(
+
+                          // Use the string name to access icons.
+                            icon: Icon(Icons.add_circle,color:Colors.white,),
+
+                            onPressed: () { print('Using the sword'); }
+                        ),
+                        iconName2=IconButton(
+
+                          // Use the string name to access icons.
+                            icon: Icon(Icons.style,color:Colors.white,),
+
+                            onPressed: () { print('Using the sword'); }
+                        ),
+                        iconName3=IconButton(
+
+                          // Use the string name to access icons.
+                            icon: Icon(Icons.library_books,color:Colors.white,),
+
+                            onPressed: () { print('Using the sword'); }
+                        ),
+                        iconName4=IconButton(
+
+                          // Use the string name to access icons.
+                            icon: Icon(Icons.settings,color:Colors.white,),
+
+                            onPressed: () { print('Using the sword'); }
+                        ),
+
+                      ],
+                    ),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
-                      commonCardDesign("Text3"),
-                      commonCardDesign("Text4"),
+
+                      commonCardDesign("Add Books",iconName1),
+
+                      commonCardDesign("Borrowed Books",iconName2),
+                    ],
+                  ),
+
+
+
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+
+                      commonCardDesign("Lent Books",iconName3),
+
+                      commonCardDesign("Settings",iconName4),
                     ],
                   ),
                 ])),
@@ -145,7 +189,7 @@ class CarouselDemo extends StatelessWidget {
       ),
     );
   }
-  commonCardDesign(String cardName){
+  commonCardDesign(String cardName, dynamic iconName){
     return
     Card(
       elevation: 4.0,
@@ -161,19 +205,20 @@ class CarouselDemo extends StatelessWidget {
           width: SizeConfig.screenWidth*0.45,
           height: SizeConfig.screenHeight*0.20,
           child: Center(
-
+          child:Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
 //            child: Text('$cardName', style: TextStyle(
 //              color:Colors.white,
 //
 //            ),
 //            ),
-          child: IconButton(
-            // Use the string name to access icons.
-              icon: Icon(Icons.library_books,color:Colors.white,),
+            children: <Widget>[
+            iconName,
 
-              onPressed: () { print('Using the sword'); }
+           Text('$cardName', style:TextStyle(color: Colors.white),),
+          ],
           ),
-
           ),
         ),
       ),
