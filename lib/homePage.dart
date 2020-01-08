@@ -1,5 +1,6 @@
 import 'dart:ui' as prefix0;
 
+import 'package:bookish/addBook.dart';
 import 'package:bookish/sizeconfig.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
@@ -134,7 +135,10 @@ class CarouselDemo extends StatelessWidget {
                           // Use the string name to access icons.
                             icon: Icon(Icons.add_circle,color:Colors.white,),
 
-                            onPressed: () { print('Using the sword'); }
+                            onPressed: () { Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => EditProfile()),
+                            ); }
                         ),
                         iconName2=IconButton(
 

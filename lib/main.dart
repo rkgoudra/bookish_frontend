@@ -2,7 +2,10 @@ import 'package:bookish/CommonString.dart';
 import 'package:bookish/login.dart';
 import 'package:flutter/material.dart';
 
+import 'BarcodeQr.dart';
+
 void main() => runApp(MyApp());
+//void main() => runApp(BarcodeQr());
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
